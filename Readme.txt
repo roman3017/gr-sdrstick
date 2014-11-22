@@ -1,0 +1,8 @@
+- Uncompress in directory of your choice.
+- cd gr-sdrstick
+- mkdir build
+- cd build
+- cmake ../
+- make
+- sudo make install
+- sudo ldconfig

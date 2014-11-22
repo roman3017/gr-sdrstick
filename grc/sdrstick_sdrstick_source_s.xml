@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<block>
+  <name>Sdrstick Source</name>
+  <key>sdrstick_sdrstick_source_s</key>
+  <category>Sdrstick</category>
+  <import>import sdrstick</import>
+   <!--  <make>sdrstick.sdrstick_source_s($itemsize, $*host, $*sipaddr, $port, $payload_size, $eof, $wait)</make> -->
+   <!-- <make>blocks.udp_source($type.size*$vlen, $ipaddr, $port, $psize, $eof)</make> -->
+   <make>sdrstick.sdrstick_source_s($type.size*$vlen, $*hostip, $*sipaddr, $port, $sr_idx)
+self.$(id).set_freq($freq)
+    </make>
+  <!-- <callback>set_mtu($mtu)</callback> -->
+  <callback>set_freq($freq)</callback> 
+
+        <param>
+                <name>Output Type</name>
+                <key>type</key>
+                <type>enum</type>
+                 <option>
+                        <name>Short</name>
+                        <key>short</key>
+                        <opt>size:gr.sizeof_short</opt>
+                </option>
+        </param>
+        <param>
+                <name>Set Frequency (Hz)</name>
+                <key>freq</key>
+                <value>1580000</value>
+                <type>real</type>
+        </param>
+        <param>
+                <name>Host IP Address</name>
+                <key>hostip</key>
+                <value>192.168.1.200</value>
+                <type>string</type>
+        </param>
+         <param>
+                <name>SDRSTICK IP Address</name>
+                <key>sipaddr</key>
+                <value>192.168.1.26</value>
+                <type>string</type>
+        </param>
+       <param>
+                <name>Port</name>
+                <key>port</key>
+                <value>8001</value>
+                <type>int</type>
+       </param>
+       <param>
+                <name>Sample Rate (Hi/Low)</name>
+                <key>sr_idx</key>
+                <value>0</value>
+                <type>int</type>
+       </param>
+        <param>
+                <name>Vec Length</name>
+                <key>vlen</key>
+                <value>1</value>
+                <type>int</type>
+        </param>
+        <check>$vlen &gt; 0</check>
+        <check>($freq &gt;= 0) and ($freq &lt;= 55e6)</check>
+        <source>
+                <name>out</name>
+                <type>$type</type>
+                <vlen>$vlen</vlen>
+        </source>
+        <doc>
+SDRSTICK Source Block
+Supports models: HF0, HF1, and HF2
+Sample Rate Selection (High/Low):
+    HF0:  0 = 1.25MSPS, 1 = 384 KSPS
+    HF1:  0 = 1.25MSPS, 1 = 384 KSPS
+    HF2:  0 = 1.92MSPS, 1 = 384 KSPS
+        </doc>
+     
+</block>
