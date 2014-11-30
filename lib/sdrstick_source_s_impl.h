@@ -29,7 +29,7 @@
 namespace gr {
   namespace sdrstick {
 
-    class sdrstick_source_s_impl : public sdrstick_source_s
+    class SDRSTICK_API sdrstick_source_s_impl : public sdrstick_source_s
     {
      private:
         size_t  d_itemsize;
